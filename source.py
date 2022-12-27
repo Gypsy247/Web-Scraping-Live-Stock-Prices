@@ -14,17 +14,17 @@ monitor_stocks = [
     'BABA',
 ]
 stock_data = []
+user_agent = 'paste your user agent here'
 
 
-def fetchStocks(stk_symbol):
+def fetchStocks(usr_agnt, stk_symbol):
 
     # google 'my user agent' and copy paste the string below
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'}
+    headers = {'User-Agent': usr_agnt}
     # webpage to query
     url = f'https://finance.yahoo.com/quote/{stk_symbol}'
     # fetching the information from the website
-    r = requests.get(url)
+    r = requests.get(url, headers=headers)
     # using BeautifulSoup to parse the HTML page
     soup = BeautifulSoup(r.text, 'html.parser')
     stocks = {
@@ -37,7 +37,7 @@ def fetchStocks(stk_symbol):
 
 
 for stock in monitor_stocks:
-    stock_data.append(fetchStocks(stock))
+    stock_data.append(fetchStocks(user_agent, stock))
     print('Getting: ', stock)
 
 print(stock_data)
