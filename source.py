@@ -1,3 +1,4 @@
+import json
 import requests
 from bs4 import BeautifulSoup
 
@@ -14,7 +15,7 @@ monitor_stocks = [
     'BABA',
 ]
 stock_data = []
-user_agent = 'paste your user agent here'
+user_agent = 'paste the user agent here'
 
 
 def fetchStocks(usr_agnt, stk_symbol):
@@ -35,4 +36,5 @@ for stock in monitor_stocks:
     stock_data.append(fetchStocks(user_agent, stock))
     print('Getting: ', stock)
 
-print(stock_data)
+with open('stock_data.json', 'w') as f:
+    json.dump(stock_data, f)
