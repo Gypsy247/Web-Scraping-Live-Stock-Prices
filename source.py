@@ -18,14 +18,9 @@ user_agent = 'paste your user agent here'
 
 
 def fetchStocks(usr_agnt, stk_symbol):
-
-    # google 'my user agent' and copy paste the string below
     headers = {'User-Agent': usr_agnt}
-    # webpage to query
     url = f'https://finance.yahoo.com/quote/{stk_symbol}'
-    # fetching the information from the website
     r = requests.get(url, headers=headers)
-    # using BeautifulSoup to parse the HTML page
     soup = BeautifulSoup(r.text, 'html.parser')
     stocks = {
         'Stock': stk_symbol,
